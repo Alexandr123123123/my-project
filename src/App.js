@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React from 'react';
+import axios from 'axios';
+import { Routes, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Home from './components/Home';
+import Battle from './components/Battle';
+import Popular from './components/Popular';
+import NotFound from './components/NotFound';
 import './App.css';
+import { useParams } from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [activePage, setActivePage] = React.useState('Home');
+    
+    return (
+        <div className="App">
+            <div className="abc">
+                <Navigation
+                    activePage={activePage}
+                    setActivePage={setActivePage}
+                />
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/battle" element={<Battle />}></Route>
+                    <Route path="/popular" element={<Popular />}></Route>
+                    <Route path="*" element={<NotFound />}></Route>
+                </Routes>
+            </div>
+        </div>
+    );
 }
 
 export default App;
